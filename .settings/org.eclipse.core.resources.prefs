@@ -1,0 +1,12 @@
+eclipse.preferences.version=1
+encoding//src/main/java=UTF-8
+encoding//src/main/java/com/ineuron/domain/user/entity/User.java=UTF-8
+encoding//src/main/java/com/ineuron/domain/user/valueobject/Permission.java=UTF-8
+encoding//src/main/java/com/ineuron/domain/user/valueobject/readme.txt=UTF-8
+encoding//src/main/resources=UTF-8
+encoding//src/main/resources/assets/js/lib/isteven-multi-select.js=UTF-8
+encoding//src/main/resources/assets/js/lib/jquery.dataTables.min.js=UTF-8
+encoding//src/main/resources/assets/js/util/util.js=UTF-8
+encoding//src/main/resources/assets/user/updateUser.html=UTF-8
+encoding//src/test/java=UTF-8
+encoding/<project>=UTF-8

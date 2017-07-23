@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<div ng-controller="FormulaListController as formulaList">
+	<div class="right-align">
+		<button class="btn btn-large btn-primary" style="float:right;"
+			ng-click="formulaList.createFormula()">
+			<span class="glyphicon glyphicon-plus"></span> 新增配方
+		</button>
+	</div>
+	<div>
+		<table datatable="ng" dt-options="formulaList.dtOptions"
+			dt-column-defs="formulaList.dtColumnDefs" class="row-border hover"
+			id="table-style">
+			<thead>
+				<tr>
+				    <th style="width:40px">序号</th>
+					<th>配方名称</th>
+					<th>描述</th>
+					<th style="width: 100px">修改/删除</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="formula in formulaList.formulas">
+					<td>{{$index+1}}</td>
+					<td>{{formula.name}}</td>
+					<td>{{formula.description}}</td>
+					<td>
+						<button type="button" ng-click="formulaList.updateFormula($index)"
+							class="btn btn-warning">
+							<i class="fa fa-edit"></i>
+						</button>
+						<button type="button" ng-click="formulaList.deleteFormula($index)"
+							class="btn btn-danger">
+							<i class="fa fa-times"></i>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
