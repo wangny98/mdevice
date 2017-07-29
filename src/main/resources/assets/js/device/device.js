@@ -66,7 +66,10 @@ ineuronApp.controller('DeviceListController', ['$http', '$scope', '$stateParams'
 			}
 		});		
 	}
-		
+	
+	$scope.hasPermission = function(funcId) {
+		return hasPermission(funcId);
+	}
 }]);
 
 
