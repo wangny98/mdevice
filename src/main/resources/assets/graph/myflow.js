@@ -535,20 +535,25 @@
                 }).show();
                 break;
             case "image&text":
-                t.show();
+                /*t.show();
                 n.attr({
                     x:
                     F + E.img.width + (G - E.img.width) / 2,
                     y: r + a.config.lineHeight / 2
-                }).show();
+                }).show();*/
                 f.attr({
-                    x: F + E.img.width + (G - E.img.width) / 2,
+                    x: F + E.img.width + (G - E.img.width) / 2 + 50,
                     y: r + (o - a.config.lineHeight) / 2 + a.config.lineHeight
                 }).show();
                 e.attr({
-                    x: F + E.img.width / 2,
+                    x:
+                    F + (G - E.img.width) / 2,
                     y: r + (o - E.img.height) / 2
                 }).show();
+               /* e.attr({
+                    x: F + E.img.width / 2,
+                    y: r + (o - E.img.height) / 2
+                }).show();*/
                 break
             }
             i.t.attr({
