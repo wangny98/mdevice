@@ -1,0 +1,15 @@
+<meta charset="utf-8">
+<!DOCTYPE html>
+<div ng-controller="DeviceDataAnalysisController as DeviceDataAnalysis">
+	<uib-tabset active="active" type="tabs"> <uib-tab
+		index="0" heading="区域线别" style="font-weight:bold;"
+		select="showReport()">
+	 <div style="">
+		<nvd3 options='options' data='data'></nvd3>
+	</div>
+	
+	</uib-tab> <uib-tab index="1" heading="主设备" style="font-weight:bold;"
+		select="showAllProducts()">
+	<div></div>
+	</uib-tab> </uib-tabset>
+</div>

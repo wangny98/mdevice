@@ -108,6 +108,13 @@ ineuronApp.controller('UserUpdateController', ['$scope', '$stateParams', '$http'
 		})
 	}
 	
+	
+	vm.backward = backward;
+	function backward() {
+		$state.go("userManagement");
+	}
+	
+	
 	vm.deleteUserModal=deleteUserModal;   
 	function deleteUserModal(){ 
 		ineuronApp.confirm("确认","确定删除吗？", 'sm', $rootScope, $uibModal).result.then(function(clickok){  
@@ -127,8 +134,7 @@ ineuronApp.controller('UserUpdateController', ['$scope', '$stateParams', '$http'
 					console.log("error");
 				})
 			}
-		});		
-		
+		});			
 	}
 
 }]); // end of controller
@@ -363,6 +369,12 @@ ineuronApp.controller('RoleUpdateController', ['$scope', '$stateParams', '$http'
 				})
 			}
 		});				
+	}
+	
+	
+	vm.backward = backward;
+	function backward() {
+		$state.go("roleManagement");
 	}
 
 }]);

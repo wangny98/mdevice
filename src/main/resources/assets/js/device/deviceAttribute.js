@@ -73,6 +73,7 @@ ineuronApp.controller('DeviceAttributeCreateAndUpdateController', ['$scope', '$s
 	
 	var vm = this;	
 	$scope.existedDeviceAttributeName=false;
+	$scope.existedDeviceAttributeCode=false;
 	
 	
 	$http({
@@ -95,8 +96,8 @@ ineuronApp.controller('DeviceAttributeCreateAndUpdateController', ['$scope', '$s
 		console.log("error to get device attribute category list ");
 	});				
 
+	
 	$scope.CheckDeviceAttributeName=function(){
-		
 		$http({
 			url : '/device/getdeviceattributebyname',
 			method : 'POST',
@@ -123,27 +124,57 @@ ineuronApp.controller('DeviceAttributeCreateAndUpdateController', ['$scope', '$s
 		});				
 	}
 
+	
+	$scope.CheckDeviceAttributeCode=function(){
+		$http({
+			url : '/device/getdeviceattributebycode',
+			method : 'POST',
+			data :  $scope.deviceAttributeCode
+		}).success(function(data) {
+			// updateApiToken(data, $cookies);
+			var a = data.value;
+			if(forCreate){
+				if (a==null) $scope.existedDeviceAttributeCode=false;
+				else $scope.existedDeviceAttributeCode=true;
+			}
+			else 
+			{
+				if($scope.deviceAttributeCode==deviceAttribute.code) $scope.existedDeviceAttributeCode=false;
+				else {
+					if(a==null) $scope.existedDeviceAttributeCode=false; 
+					else $scope.existedDeviceAttributeCode=true;
+			}
+			}
+		}).error(function(data, status) {
+			handleError(status, $rootScope, $uibModal);
+			//ineuronApp.confirm("提示","依据名称调用属性失败！", 'sm', $rootScope, $uibModal);
+			console.log("error to get device attribute ");
+		});				
+	}
+	
+	
 
 	vm.createAndUpdateDeviceAttribute = createAndUpdateDeviceAttribute;
 	function createAndUpdateDeviceAttribute() {
-
+    //alert("create device attribute");
 		if(forCreate){
+			//alert("create"+$scope.deviceAttributeName+"  "+$scope.selectedDeviceAttributeCategory[0].id);
 			$http({
 				url : '/device/createdeviceattribute',
 				method : 'POST',
 				data : {
 					name : $scope.deviceAttributeName,
 					code: $scope.deviceAttributeCode,
-					description : $scope.deviceAttributeDescription,
-					deviceAttributeCategoryId: $scope.selectedDeviceAttributeCategory[0].id
+					deviceAttributeCategoryId: $scope.selectedDeviceAttributeCategory[0].id,
+					description : $scope.deviceAttributeDescription
 				}
 			}).success(function(data) {
 				updateApiToken(data, $cookies);
 				ineuronApp.confirm("提示","属性添加成功！", 'sm', $rootScope, $uibModal);		
-				$state.go("attributeList");
+				$state.go("deviceAttributeList");
 			}).error(function(data,status) {
-				handleError(status, $rootScope, $uibModal);
-				//ineuronApp.confirm("提示","添加属性失败！", 'sm', $rootScope, $uibModal);
+				//handleError(status, $rootScope, $uibModal);
+				ineuronApp.confirm("提示","添加属性失败！", 'sm', $rootScope, $uibModal);
 				console.log("error");
 		  		})
 		}
