@@ -18,14 +18,14 @@ $.extend(true,myflow.config.props.props,{
 
 
 $.extend(true,myflow.config.tools.states,{
-			task : {showType: 'text',type : 'task',
-				name : {text:'<<task>>'},
+			task : {type : 'task',
 				text : {text:'设备'},
-				img : {src : 'img/48/task_empty.png',width :48, height:48},
+				img : {src : 'img/48/guan.png',width :72, height:48},
 				props : {
 					text: {name:'text', label: '设备ID', value:'', editor: function(){return new myflow.editors.textEditor();}, value:'任务'},
 					assignee: {name:'assignee', label: '设备名称', value:'', editor: function(){return new myflow.editors.inputEditor();}},
 					desc: {name:'desc', label : '描述', value:'', editor: function(){return new myflow.editors.inputEditor();}}
 				}}
+		
 });
 })(jQuery);
