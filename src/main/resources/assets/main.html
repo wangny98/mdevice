@@ -62,6 +62,8 @@
 <script src="/ineuron/js/util/confirm.js"></script>
 <script src="/ineuron/js/user/userapp.js"></script>
 <script src="/ineuron/js/device/deviceAttribute.js"></script>
+<script src="/ineuron/js/device/device.js"></script>
+<script src="/ineuron/js/device/deviceSupervision.js"></script>
 <script src="/ineuron/js/product/product.js"></script>
 <script src="/ineuron/js/product/productCategory.js"></script>
 <script src="/ineuron/js/product/attribute.js"></script>
@@ -94,7 +96,7 @@
 									你好，{{displayUsername}} <span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" uib-dropdown-menu>
-									<li><a href="#">设置</a></li>
+									<!-- <li><a href="#">设置</a></li>  -->
 									<li><a href="#" ng-click="logout()">退出</a></li>
 								</ul>
 							</div>
@@ -115,54 +117,37 @@
 					</a></li> -->
 					<li class="active"><a href="#" ui-sref="frontpage"><i class="glyphicon glyphicon-home"></i>
 							首页 </a></li>
-					<li><a href="#productManagement" class="nav-header"
-						data-toggle="collapse"><i class="glyphicon glyphicon-list"></i>
-							产品管理 <span class="pull-right glyphicon glyphicon-chevron-down"></span>
-					</a>
-						<ul id="productManagement"
-							class="nav nav-list collapse secondmenu" style="height: 0px;">
-							<li><a ui-sref="productCategoryList"
-								class="secondmenu-position" ui-sref-active="active"
-								ng-show="hasPermission('11')"> <i
-									class="glyphicon glyphicon-list"></i>产品类管理
-							</a></li>
-							<li><a ui-sref="allProductList" class="secondmenu-position"
-								ui-sref-active="active" ng-show="hasPermission('11')"> <i
-									class="glyphicon glyphicon-list"></i>产品管理
-							</a></li>
-							<li><a ui-sref="attributeList" class="secondmenu-position"
-								ui-sref-active="active" ng-show="hasPermission('12')"> <i
-									class="glyphicon glyphicon-list"></i>属性管理
-							</a></li>
-							<li><a ui-sref="formulaList" class="secondmenu-position"
-								ui-sref-active="active" ng-show="hasPermission('13')"> <i
-									class="glyphicon glyphicon-list"></i>配方管理
-							</a></li>
-						</ul></li>
 					<li><a href="#deviceManagement" class="nav-header"
 						data-toggle="collapse"><i class="glyphicon glyphicon-filter"></i>
 						设备管理 	<span class="pull-right glyphicon glyphicon-chevron-down"></span> 
 						</a>
 						<ul id="deviceManagement" class="nav nav-list collapse secondmenu"
 							style="height: 0px;">
-							<li><a ui-sref="deviceAttributeList" class="secondmenu-position"
-								ui-sref-active="active" ng-show="hasPermission('11')"> <i
-									class="glyphicon glyphicon-list"></i>设备属性
-							</a></li>
-							<li><a ui-sref="deviceCodeList" class="secondmenu-position"
-								ui-sref-active="active" ng-show="hasPermission('12')"> <i
-									class="glyphicon glyphicon-list"></i>设备编码
-							</a></li>
 							<li><a ui-sref="deviceList" class="secondmenu-position"
-								ui-sref-active="active" ng-show="hasPermission('13')"> <i
+								ui-sref-active="active" ng-show="hasPermission('11')"> <i
 									class="glyphicon glyphicon-list"></i>设备管理
+							</a></li>
+							<li><a ui-sref="deviceAttributeList" class="secondmenu-position"
+								ui-sref-active="active" ng-show="hasPermission('12')"> <i
+									class="glyphicon glyphicon-list"></i>属性管理
 							</a></li>
 						</ul>
 					</li>
-					<li><a href="#" class="nav-header"
+					<li><a href="#deviceSupervision" class="nav-header"
 						data-toggle="collapse"><i class="glyphicon glyphicon-search"></i>
 							设备监控<span class="pull-right glyphicon glyphicon-chevron-down"></span>
 						 </a>
+						 <ul id="deviceSupervision" class="nav nav-list collapse secondmenu"
+							style="height: 0px;">
+							<li><a ui-sref="deviceMonitor" class="secondmenu-position"
+								ui-sref-active="active" ng-show="hasPermission('21')"> <i
+									class="glyphicon glyphicon-list"></i>实时监控
+							</a></li>
+							<li><a ui-sref="deviceDataAnalysis" class="secondmenu-position"
+								ui-sref-active="active" ng-show="hasPermission('22')"> <i
+									class="glyphicon glyphicon-list"></i>历史数据分析
+							</a></li>
+						</ul>
 					</li>
 					<li><a href="#systemSetting" class="nav-header"
 						data-toggle="collapse"> <i class="glyphicon glyphicon-cog"></i>

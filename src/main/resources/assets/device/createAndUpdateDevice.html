@@ -1,0 +1,126 @@
+<meta charset="utf-8">
+<head></head>
+<div
+	ng-controller="DeviceCreateAndUpdateController as deviceCreateAndUpdate">
+	<div class="message">设备</div>
+	<div>
+		<table id="table-style" style="margin: 50px auto">
+			<tbody>
+			<tr>
+					<th class="labelformat">名称</th>
+					<td style="min-width:300px"><label
+						style="text-align: center; font-weight: bold; color: green">
+							{{deviceName}}</label></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><label ng-show="existedDeviceName"
+						style="text-align: center; font-weight: bold; color: red">设备名已存在！请重新输入。</label>
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<th class="labelformat">编码</th>
+					<td><label
+						style="text-align: center; font-weight: bold; color: green">
+							{{deviceCode}}</label></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td><label ng-show="existedDeviceCode"
+						style="text-align: center; font-weight: bold; color: red">编码已存在！请重新输入。</label>
+					</td>
+					<td></td>
+				</tr>
+				<tr>
+					<th class="labelformat">属性-区域线别：</th>
+					<td><div isteven-multi-select
+							input-model="deviceCreateAndUpdate.deviceAttributesLocations"
+							output-model="selectedDeviceAttributeLocation"
+							output-properties="id name code" button-label="name code"
+							item-label="name code" tick-property="ticked"
+							orientation="horizontal" selection-mode="single"
+							on-close="CheckDeviceNameAndCode()"></div></td>
+					<td style="color: red">*</td>
+				</tr>
+				<tr>
+					<th class="labelformat">属性-主设备：</th>
+					<td><div isteven-multi-select
+							input-model="deviceCreateAndUpdate.deviceAttributesDevices"
+							output-model="selectedDeviceAttributeDevice"
+							output-properties="id name code" button-label="name code"
+							item-label="name code" tick-property="ticked"
+							orientation="horizontal" selection-mode="single"
+							on-close="CheckDeviceNameAndCode()"></div></td>
+					<td style="color: red">*</td>
+				</tr>
+				<tr>
+					<th class="labelformat">属性-控制点：</th>
+					<td><div isteven-multi-select
+							input-model="deviceCreateAndUpdate.deviceAttributesControllers"
+							output-model="selectedDeviceAttributeController"
+							output-properties="id name code" button-label="name code"
+							item-label="name code" tick-property="ticked"
+							orientation="horizontal" selection-mode="single"
+							on-close="CheckDeviceNameAndCode()"></div></td>
+					<td style="color: red">*</td>
+				</tr>
+				
+				<tr>
+					<th class="labelformat">类型:</th>
+					<td><div isteven-multi-select
+							input-model="deviceCreateAndUpdate.deviceTypes"
+							output-model="selectedDeviceType" output-properties="id name"
+							button-label="name" item-label="name" tick-property="ticked"
+							orientation="horizontal" selection-mode="single"></div></td>
+					<td style="color: red">*</td>
+				</tr>
+				<tr>
+					<th class="labelformat">数据源:</th>
+					<td><div isteven-multi-select
+							input-model="deviceCreateAndUpdate.dataSource"
+							output-model="selectedDataSource" output-properties="name"
+							button-label="name" item-label="name" tick-property="ticked"
+							orientation="horizontal" selection-mode="single"></div></td>
+					<td style="color: red">*</td>
+				</tr>
+				<tr>
+					<th class="labelformat">PLC地址</th>
+					<td><input class="input-block-level" type="text" 
+							ng-model="plcAddress" /></td>
+						<td></td>
+					</tr>
+				<tr>
+				<tr>
+					<th class="labelformat">数据采集频率(ms)</th>
+					<td><input class="input-block-level" type="text" 
+							ng-model="plcDataFrequency" /></td>
+						<td></td>
+					</tr>
+				<tr>
+					<th class="labelformat">说明</th>
+					<td><textarea style="min-height: 60px"
+							class="input-block-level" type="text"
+							ng-model="deviceDescription" /></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td></td>
+					<td>
+						<button class="btn btn-large btn-primary"
+							ng-click="deviceCreateAndUpdate.createAndUpdateDevice()">
+							<span class="glyphicon glyphicon-upload"></span> 提 交
+						</button>
+						<button class="btn btn-large btn-primary"
+							ng-click="deviceCreateAndUpdate.backward()">
+							<span class="glyphicon glyphicon-arrow-left"></span> 返 回
+						</button>
+					</td>
+					<td></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

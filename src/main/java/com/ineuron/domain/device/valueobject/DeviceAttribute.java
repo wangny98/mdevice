@@ -14,29 +14,30 @@ public class DeviceAttribute {
 	private String name;
 	private String code;
 	private Integer deviceAttributeCategoryId;
+	private String description;
 	
 	private DeviceAttributeCategory deviceAttributeCategory;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(DeviceAttribute.class);
 
 	public void addAttribute(INeuronRepository repository) throws RepositoryException {
-		repository.add("addAttribute", this);
+		repository.add("addDeviceAttribute", this);
 		
 	}
 
 	public void updateAttribute(INeuronRepository repository) throws RepositoryException {
-		repository.update("updateAttribute", this);
+		repository.update("updateDeviceAttribute", this);
 	}
 
 	
 	public void deleteAttibute(INeuronRepository repository) throws RepositoryException {
-		repository.delete("deleteAttribute", this);
+		repository.delete("deleteDeviceAttribute", this);
 		
 	}
 	
 	public void init(INeuronRepository repository) throws RepositoryException{
 		
-		deviceAttributeCategory = repository.selectOne("getDeviceAttributeCategoryById", deviceAttributeCategoryId);	
+		deviceAttributeCategory=repository.selectOne("getDeviceAttributeCategoryById", deviceAttributeCategoryId);	
 	
 	}
 	
@@ -63,6 +64,30 @@ public class DeviceAttribute {
 
 	public void setCode(String code) {
 		this.code = code;
+	}
+
+	public Integer getDeviceAttributeCategoryId() {
+		return deviceAttributeCategoryId;
+	}
+
+	public void setDeviceAttributeCategoryId(Integer deviceAttributeCategoryId) {
+		this.deviceAttributeCategoryId = deviceAttributeCategoryId;
+	}
+	
+	public DeviceAttributeCategory getDeviceAttributeCategory() {
+		return deviceAttributeCategory;
+	}
+
+	public void setDeviceAttributeCategory(DeviceAttributeCategory deviceAttributeCategory) {
+		this.deviceAttributeCategory = deviceAttributeCategory;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }

@@ -65,6 +65,30 @@ ineuronApp.config(function($stateProvider) {
 			templateUrl : '/ineuron/device/deviceAttributeList.html'
 		}
 	
+	var deviceManagementState = {
+			name : 'deviceList',
+			url : 'deviceList/:deviceStr',
+			templateUrl : '/ineuron/device/deviceList.html'
+		}
+	
+	var createAndUpdateDeviceState = {
+			name : 'createAndUpdateDevice',
+			url : 'createAndUpdateDevice/:deviceStr',
+			templateUrl : '/ineuron/device/createAndUpdateDevice.html'
+		}
+	
+	var deviceMonitorState = {
+			name : 'deviceMonitor',
+			url : 'deviceMonitor',
+			templateUrl : '/ineuron/device/deviceMonitor.html'
+		}
+	
+	var deviceDataAnalysisState = {
+			name : 'deviceDataAnalysis',
+			url : 'deviceDataAnalysis',
+			templateUrl : '/ineuron/device/deviceDataAnalysis.html'
+		}
+	
 	
 	//Product Management
 	
@@ -176,6 +200,10 @@ ineuronApp.config(function($stateProvider) {
 	
 	$stateProvider.state(deviceAttributeManagementState);
 	$stateProvider.state(createAndUpdateDeviceAttributeState);
+	$stateProvider.state(deviceManagementState);
+	$stateProvider.state(createAndUpdateDeviceState);
+	$stateProvider.state(deviceMonitorState);
+	$stateProvider.state(deviceDataAnalysisState);
 	
 	$stateProvider.state(productCategoryManagementState);
 	$stateProvider.state(createProductCategoryState);

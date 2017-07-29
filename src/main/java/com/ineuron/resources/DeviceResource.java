@@ -9,6 +9,7 @@ import com.ineuron.domain.device.entity.Device;
 import com.ineuron.domain.device.service.DeviceService;
 import com.ineuron.domain.device.valueobject.DeviceAttributeCategory;
 import com.ineuron.domain.device.valueobject.DeviceAttribute;
+import com.ineuron.domain.device.valueobject.DeviceType;
 import com.ineuron.domain.user.service.SecurityService;
 
 import javax.ws.rs.GET;
@@ -116,9 +117,28 @@ public class DeviceResource {
 		} catch (InvalidAPITokenException e) {
 			LOGGER.error(e.getMessage(), e.getRootCause());
 			return Response.status(Status.UNAUTHORIZED).build();
-		}
-		
+		}		
 	}
+	
+	
+	@Path("/devicetypelist")
+	@GET
+	@Timed
+	public Response deviceTypeList(@Context HttpHeaders httpHeader) {
+		try {
+			INeuronResponse response = new INeuronResponse(securityService, httpHeader, false);
+			List<DeviceType> deviceTypes = deviceService.getDeviceTypeList();
+			response.setValue(deviceTypes);
+			return Response.ok(response).build();
+		} catch (RepositoryException e) {
+			LOGGER.error(e.getMessage(), e.getRootCause());
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		} catch (InvalidAPITokenException e) {
+			LOGGER.error(e.getMessage(), e.getRootCause());
+			return Response.status(Status.UNAUTHORIZED).build();
+		}		
+	}
+	
 
 	/*@Path("/devicelistbycategory")
 	@POST
@@ -153,9 +173,46 @@ public class DeviceResource {
 		} catch (InvalidAPITokenException e) {
 			LOGGER.error(e.getMessage(), e.getRootCause());
 			return Response.status(Status.UNAUTHORIZED).build();
-		}
-		
+		}		
 	}
+	
+	
+	@Path("/getdevicebycode")
+	@POST
+	@Timed
+	public Response deviceByCode(final String code, @Context HttpHeaders httpHeader) {
+		try {
+			INeuronResponse response = new INeuronResponse(securityService, httpHeader, false);
+			Device device = deviceService.getDeviceByCode(code);
+			response.setValue(device);
+			return Response.ok(response).build();
+		} catch (RepositoryException e) {
+			LOGGER.error(e.getMessage(), e.getRootCause());
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		} catch (InvalidAPITokenException e) {
+			LOGGER.error(e.getMessage(), e.getRootCause());
+			return Response.status(Status.UNAUTHORIZED).build();
+		}		
+	}
+	
+	@Path("/getdevicesbyattribute")
+	@POST
+	@Timed
+	public Response devicesByAttribute(final String attributeCode, @Context HttpHeaders httpHeader) {
+		try {
+			INeuronResponse response = new INeuronResponse(securityService, httpHeader, false);
+			List<Device>  devices = deviceService.getDevicesByAttributeCode(attributeCode);
+			response.setValue(devices);
+			return Response.ok(response).build();
+		} catch (RepositoryException e) {
+			LOGGER.error(e.getMessage(), e.getRootCause());
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		} catch (InvalidAPITokenException e) {
+			LOGGER.error(e.getMessage(), e.getRootCause());
+			return Response.status(Status.UNAUTHORIZED).build();
+		}		
+	}
+	
 
 	@Path("/devicebyid")
 	@GET
@@ -177,13 +234,13 @@ public class DeviceResource {
 		
 	}
 
-	/*@Path("/deviceattributecategorylist")
+	@Path("/deviceattributecategorylist")
 	@GET
 	@Timed
 	public Response deviceAttributeCategoryList(@Context HttpHeaders httpHeader) {
 		try {
 			INeuronResponse response = new INeuronResponse(securityService, httpHeader, false);
-			List<DeviceAttributeCategory> deviceAttributeCategories = deviceService..getDeviceAttributeCategoryList();
+			List<DeviceAttributeCategory> deviceAttributeCategories = deviceService.getAttributeCategoryList();
 			response.setValue(deviceAttributeCategories);
 			return Response.ok(response).build();
 		} catch (RepositoryException e) {
@@ -193,7 +250,7 @@ public class DeviceResource {
 			LOGGER.error(e.getMessage(), e.getRootCause());
 			return Response.status(Status.UNAUTHORIZED).build();
 		}		
-	}*/
+	}
 
 	@Path("/deviceattributelist")
 	@GET
@@ -248,15 +305,36 @@ public class DeviceResource {
 		} catch (InvalidAPITokenException e) {
 			LOGGER.error(e.getMessage(), e.getRootCause());
 			return Response.status(Status.UNAUTHORIZED).build();
-		}
-		
+		}		
 	}
+	
+	
+	@Path("/getdeviceattributebycode")
+	@POST
+	@Timed
+	public Response deviceAttributeByCode(final String code, @Context HttpHeaders httpHeader) {
+		try {
+			INeuronResponse response = new INeuronResponse(securityService, httpHeader, false);
+			DeviceAttribute deviceAttribute = deviceService.getAttributeByCode(code);
+			response.setValue(deviceAttribute);
+			return Response.ok(response).build();
+		} catch (RepositoryException e) {
+			LOGGER.error(e.getMessage(), e.getRootCause());
+			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+		} catch (InvalidAPITokenException e) {
+			LOGGER.error(e.getMessage(), e.getRootCause());
+			return Response.status(Status.UNAUTHORIZED).build();
+		}		
+	}
+	
 
+	
 	@Path("/createdeviceattribute")
 	@POST
 	@Timed
 	public Response createDeviceAttribute(final DeviceAttribute deviceAttribute, @Context HttpHeaders httpHeader) {
 		try {
+			//System.out.println("in create attribute resource");
 			INeuronResponse response = new INeuronResponse(securityService, httpHeader, false);
 			deviceService.createAttribute(deviceAttribute);
 			response.setValue(deviceAttribute);
