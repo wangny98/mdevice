@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.ineuron.common.exception.RepositoryException;
 import com.ineuron.dataaccess.db.INeuronRepository;
+import com.ineuron.domain.device.valueobject.DeviceType;
 //import com.ineuron.domain.device.repository.ProductionRepository;
 
 public class Device {
@@ -11,13 +12,17 @@ public class Device {
 	private Integer id;
 	private String name;
 	private String code;
+	private Integer typeId;
 	private String dataSource; 
-	private Integer serialNumber;
+	private String plcAddress;
+	private String plcDataFrequency;
 	private Float minVolume;
 	private Float maxVolume;
-	private String type;
+	private String unit;
 	private Integer status;
 	private String description;
+	
+	private DeviceType deviceType;
 	//private static final Logger LOGGER = LoggerFactory.getLogger("Device");
 
 	public void addDevice(INeuronRepository repository) throws RepositoryException {
@@ -33,7 +38,7 @@ public class Device {
 	}
 	
 	public void init(INeuronRepository repository) throws RepositoryException{
-			
+		deviceType=repository.selectOne("getDeviceTypeById", typeId);
 	}
 
 	public Integer getId() {
@@ -52,6 +57,22 @@ public class Device {
 		this.name = name;
 	}
 
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getDataSource() {
+		return dataSource;
+	}
+
+	public void setDataSource(String dataSource) {
+		this.dataSource = dataSource;
+	}
+
 	public Float getMinVolume() {
 		return minVolume;
 	}
@@ -66,14 +87,6 @@ public class Device {
 
 	public void setMaxVolume(Float maxVolume) {
 		this.maxVolume = maxVolume;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public String getDescription() {
@@ -92,28 +105,45 @@ public class Device {
 		this.status = status;
 	}
 
-	public String getCode() {
-		return code;
+	public Integer getTypeId() {
+		return typeId;
 	}
 
-	public void setCode(String code) {
-		this.code = code;
+	public void setTypeId(Integer typeId) {
+		this.typeId = typeId;
 	}
 
-	public String getDataSource() {
-		return dataSource;
+
+	public String getUnit() {
+		return unit;
 	}
 
-	public void setDataSource(String dataSource) {
-		this.dataSource = dataSource;
+	public void setUnit(String unit) {
+		this.unit = unit;
 	}
 
-	public Integer getSerialNumber() {
-		return serialNumber;
+	public DeviceType getDeviceType() {
+		return deviceType;
 	}
 
-	public void setSerialNumber(Integer serialNumber) {
-		this.serialNumber = serialNumber;
+	public void setDeviceType(DeviceType deviceType) {
+		this.deviceType = deviceType;
 	}
-		
+
+	public String getPlcAddress() {
+		return plcAddress;
+	}
+
+	public void setPlcAddress(String plcAddress) {
+		this.plcAddress = plcAddress;
+	}
+
+	public String getPlcDataFrequency() {
+		return plcDataFrequency;
+	}
+
+	public void setPlcDataFrequency(String plcDataFrequency) {
+		this.plcDataFrequency = plcDataFrequency;
+	}
+
 }

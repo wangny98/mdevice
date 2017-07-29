@@ -20,12 +20,12 @@
 							ng-model="updateRoleDescription" value=""></td>
 					</tr>
 					<tr>
-						<th class="labelformat">特殊权限：</th>
+						<th class="labelformat">权限:</th>
 						<td>
 							<table>
 								<tr>
 									<th class="labelformat">功能</th>
-									<th class="labelformat">操作</th>
+									<th class="labelformat" style="min-width:200px">操作</th>
 								</tr>
 								<tr ng-repeat="func in roleUpdate.funcs">
 									<td>{{func.name}}</td>
@@ -50,7 +50,11 @@
 											ng-click="roleUpdate.deleteRole()">
 											<span class="glyphicon glyphicon-trash"
 												style="color: rgb(255, 140, 60);"></span> 删除角色
-										</button>
+									</button>
+									<button class="btn btn-large btn-primary"
+											ng-click="roleUpdate.backward()">
+											<span class="glyphicon glyphicon-arrow-left"></span> 返 回
+									</button>
 									</td>
 								</tr>
 								</tbody>

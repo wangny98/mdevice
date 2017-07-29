@@ -9,12 +9,12 @@
 			<table id="table-style" style="margin:50px auto">
 				<tbody>
 					<tr>
-						<th class="labelformat">用户名</th>
+						<th class="labelformat">用户名:</th>
 						<td><label class="labelformat">{{userUpdate.user.username}}</label>
 						</td>
 					</tr>
 					<tr>
-						<th class="labelformat">角色</th>
+						<th class="labelformat">角色:</th>
 						<td>
 							<div isteven-multi-select input-model="userUpdate.roles"
 								output-model="newroles" button-label="rolename"
@@ -23,12 +23,12 @@
 					</tr>
 					
 					<tr>
-						<th class="labelformat">特殊权限</th>
+						<th class="labelformat">特殊权限:</th>
 						<td>
 							<table>
 								<tr>
 									<th class="labelformat">功能</td>
-									<th class="labelformat">操作</td>
+									<th class="labelformat" style="min-width:200px">操作</td>
 								</tr>
 								<tr ng-repeat="func in userUpdate.funcs">
 									<td>{{func.name}}</td>
@@ -54,7 +54,12 @@
 											ng-click="userUpdate.deleteUserModal('sm')">
 											<span class="glyphicon glyphicon-trash"
 												style="color: rgb(255, 140, 60);"></span> 删除用户
-										</button></td>
+										</button>
+										<button class="btn btn-large btn-primary"
+											ng-click="userUpdate.backward()">
+											<span class="glyphicon glyphicon-arrow-left"></span> 返 回
+									</button>
+										</td>
 								</tr>
 					
 				</tbody>

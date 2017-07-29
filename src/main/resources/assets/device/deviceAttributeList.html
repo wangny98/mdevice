@@ -12,20 +12,20 @@
 		dt-column-defs="deviceAttributeList.dtColumnDefs" class="row-border hover" id="table-style">
 		<thead>
 			<tr>
-				<th style="width:40px">序号</th>
-				<th>名称</th>
-				<th>编码</th>
-				<th>类型</th>
-				<th>描述</th>
-				<th style="width:100px">编辑/删除</th>
+				<th style="width:6%">序号</th>
+				<th style="width:30%">名称</th>
+				<th style="width:10%">编码</th>
+				<th style="width:15%">类别</th>
+				<th style="width:20%">描述</th>
+				<th style="width:10%">编辑/删除</th>
 			</tr>
 		</thead>
 		<tbody>
 			<tr ng-repeat="deviceAttribute in deviceAttributeList.deviceAttributes">
 			   <td style="width:45px; text-align: center;">{{$index+1}}</td>
 			   <td>{{deviceAttribute.name}}</td>
-			   <td>{{deviceAttribute.code}}</td>
-			   <td>{{deviceAttribute.deviceAttributeCategory.name}}</td>
+			   <td style="text-align: center;">{{deviceAttribute.code}}</td>
+			   <td style="text-align: center;">{{deviceAttribute.deviceAttributeCategory.name}}</td>
 			   <td>{{deviceAttribute.description}}</td>
 				<td>
 					<button type="button"

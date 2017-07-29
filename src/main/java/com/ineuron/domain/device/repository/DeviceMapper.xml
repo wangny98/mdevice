@@ -5,65 +5,123 @@
 <mapper namespace="com.ineuron.dataaccess.db.mappers.DeviceMapper">
 
 	<!-- Device -->
-	
+
 	<insert id="addDevice">
-		insert into Devices (name,code,serialNumber,dataSource,type,description)
-		values(#{name},#{code}#{serialNumber},#{dataSource},#{type},#{description})
+		insert into Devices
+		(name,code,typeId,dataSource,plcAddress,plcDataFrequency,description)
+		values(#{name},#{code},#{typeId},#{dataSource},#{plcAddress},#{plcDataFrequency},#{description})
 	</insert>
 
 	<select id="getDevices" resultType="com.ineuron.domain.device.entity.Device">
 		select * from Devices
 	</select>
-	
-	<select id="getDeviceByCode" resultType="com.ineuron.domain.device.entity.Device">
-		select * from Devices where code=#{code}
+
+	<select id="getDeviceByName" resultType="com.ineuron.domain.device.entity.Device">
+		select * from Devices
+		where name=#{name}
 	</select>
-		
+
+	<select id="getDeviceByCode" resultType="com.ineuron.domain.device.entity.Device">
+		select * from Devices
+		where code=#{code}
+	</select>
+	
+	<select id="getDevicesByAttribute" resultType="com.ineuron.domain.device.entity.Device">
+		select * from Devices where code like  '%'+#{attributeCode}+'%' 
+	</select>
+
 	<update id="updateDevice">
-		update Devices set name = #{name}, code =#{code}, serialNumber =#{serialNumber}, 
-		dataSource =#{dataSource}, type =#{type},description=#{description} where code = #{code}
+		update Devices set name = #{name}, code =#{code},
+		typeId =#{typeId}, dataSource =#{dataSource},
+		plcAddress =#{plcAddress}, plcDataFrequency
+		=#{plcDataFrequency},description=#{description} where id = #{id}
 	</update>
 
 	<delete id="deleteDevice">
-		delete from Devices where code = #{code}
+		delete from Devices where name = #{name}
 	</delete>
 
-	
+
+
+    <!-- Device Status Data -->
+
+	<select id="getDeviceStatusDataByAttribute" resultType="com.ineuron.domain.device.valueobject.DeviceStatusData">
+		select * from DeviceStatusData 
+		where deviceId in (select id from Devices where code like  '%'+#{attributeCode}+'%')
+	</select>
+
+	<select id="getDeviceStatusDataByAttributeAndDeviceType" resultType="com.ineuron.domain.device.valueobject.DeviceStatusData">
+		select DeviceStatusData.id, DeviceStatusData.deviceId ,DeviceStatusData.value
+     		  ,DeviceStatusData.time ,Devices.name
+  		from DeviceStatusData
+  		inner join Devices on DeviceStatusData.deviceId=Devices.id
+   		where DeviceStatusData.deviceId in (select id from Devices where typeId=#{typeId} and code like  '%'+#{attributeCode}+'%')
+	</select>
+
+
+	<!-- device type -->
+
+	<select id="getDeviceTypes" resultType="com.ineuron.domain.device.valueobject.DeviceType">
+		select * from DeviceTypes
+	</select>
+
+	<select id="getDeviceTypeById" resultType="com.ineuron.domain.device.valueobject.DeviceType">
+		select * from
+		DeviceTypes where id=#{typeId}
+	</select>
+
+
+
 	<!-- attributes -->
 
-	<select id="getDeviceAttributes" resultType="com.ineuron.domain.device.valueobject.DeviceAttribute">
+	<select id="getDeviceAttributes"
+		resultType="com.ineuron.domain.device.valueobject.DeviceAttribute">
 		select * from DeviceAttributes
 	</select>
 
-	<select id="getDeviceAttributesByCategoryId" resultType="com.ineuron.domain.device.valueobject.DeviceAttribute">
-		select * from DeviceAttributes where deviceAttributeCategoryId=#{deviceAttributeCategoryId}
+	<select id="getDeviceAttributesByCategoryId"
+		resultType="com.ineuron.domain.device.valueobject.DeviceAttribute">
+		select * from DeviceAttributes where
+		deviceAttributeCategoryId=#{deviceAttributeCategoryId}
 	</select>
-	
-	<select id="getDeviceAttributeByName" resultType="com.ineuron.domain.device.valueobject.DeviceAttribute">
+
+	<select id="getDeviceAttributeByName"
+		resultType="com.ineuron.domain.device.valueobject.DeviceAttribute">
 		select * from DeviceAttributes where name=#{name}
 	</select>
 
+	<select id="getDeviceAttributeByCode"
+		resultType="com.ineuron.domain.device.valueobject.DeviceAttribute">
+		select * from DeviceAttributes where code=#{code}
+	</select>
+
 	<insert id="addDeviceAttribute">
-		insert into DeviceAttributes (name,code,deviceAttributeCategoryId)
-		values(#{name},#{code},#{deviceAttributeCategoryId})
+		insert into DeviceAttributes
+		(name,code,deviceAttributeCategoryId,description)
+		values(#{name},#{code},#{deviceAttributeCategoryId},#{description})
 	</insert>
 
 	<update id="updateDeviceAttribute">
-		update DeviceAttributes set name = #{name}, code = #{code}, 
-		deviceAttributeCategoryId=#{deviceAttributeCategoryId} where id = #{id}
+		update DeviceAttributes set name = #{name}, code =
+		#{code}, deviceAttributeCategoryId=#{deviceAttributeCategoryId},
+		description = #{description} where id = #{id}
 	</update>
 
 	<delete id="deleteDeviceAttribute">
 		delete from DeviceAttributes where name = #{name}
 	</delete>
-	
-	<select id="getDeviceAttributeCategoryById" resultType="com.ineuron.domain.device.valueobject.DeviceAttributeCategory">
-		select * from DeviceAttributeCategories where id=#{deviceAttributeCategoryId}
+
+	<select id="getDeviceAttributeCategoryById"
+		resultType="com.ineuron.domain.device.valueobject.DeviceAttributeCategory">
+		select * from DeviceAttributeCategories where
+		id=#{deviceAttributeCategoryId}
 	</select>
-	
-	<select id="getDeviceAttributeCategories" resultType="com.ineuron.domain.device.valueobject.DeviceAttributeCategory">
+
+	<select id="getDeviceAttributeCategories"
+		resultType="com.ineuron.domain.device.valueobject.DeviceAttributeCategory">
 		select * from DeviceAttributeCategories
 	</select>
-	
-		
+
+
+
 </mapper>

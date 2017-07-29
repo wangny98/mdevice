@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<div ng-controller="DeviceListController as deviceList">
+	<div class="right-align">
+		<button class="btn btn-large btn-primary" style="float:right;" 
+			ng-show="hasPermission('11-2')" ng-click="deviceList.createDevice()">
+			<span class="glyphicon glyphicon-plus"></span> 新增设备
+		</button>
+	</div>
+	<table datatable="ng" dt-options="deviceList.dtOptions"
+		dt-column-defs="deviceList.dtColumnDefs" class="row-border hover" id="table-style">
+		<thead>
+			<tr>
+				<th style="width:5%">序号</th>
+				<th style="width:20%">名称</th>
+				<th style="width:12%">编码</th>
+				<th style="width:8%">类型</th>
+				<th style="width:8%">数据源</th>
+				<th style="width:8%">PLC地址</th>
+				<th style="width:10%">数据频率(ms)</th>
+				<th style="width:14%">描述</th>
+				<th style="width:10%">编辑/删除</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="device in deviceList.devices">
+			   <td style="width:45px; text-align: center;">{{$index+1}}</td>
+			   <td>{{device.name}}</td>
+			   <td style="text-align: center;">{{device.code}}</td>
+			   <td style="text-align: center;">{{device.deviceType.name}}</td>
+			   <td style="text-align: center;">{{device.dataSource}}</td>
+			   <td style="text-align: center;">{{device.plcAddress}}</td>
+			   <td style="text-align: center;">{{device.plcDataFrequency}}</td>
+			   <td>{{device.description}}</td>
+				<td>
+					<button type="button"
+						ng-click="deviceList.updateDevice($index)" 
+						ng-show="hasPermission('11-3')" 
+						class="btn btn-warning">
+						<i class="fa fa-edit"></i>
+					</button>
+					<button type="button"
+						ng-click="deviceList.deleteDevice($index)" 
+						ng-show="hasPermission('11-4')" 
+						class="btn btn-danger">
+						<i class="fa fa-times"></i>
+					</button>					
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
